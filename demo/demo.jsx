@@ -30,6 +30,7 @@ class Demo extends React.Component {
 
     return (
       <div>
+        <h2>Props</h2>
         <div className="attribute">
           <label>Status</label>
           <input
@@ -106,6 +107,7 @@ class Demo extends React.Component {
           />
         </div>
 
+        <h2>Preview</h2>
         <ProgressCircle
           backgroundColor={backgroundColor}
           color={color}
