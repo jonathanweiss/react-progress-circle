@@ -98,23 +98,29 @@ class Demo extends React.Component {
     ];
 
     return (
-      <div>
-        <h2>Props</h2>
-        { propEditors }
+      <div className="main">
+        <div className="props">
+          <h2>Props</h2>
+          { propEditors }
+        </div>
 
-        <h2>Preview</h2>
-        <ProgressCircle
-          backgroundColor={backgroundColor}
-          color={color}
-          label={label}
-          labelColor={labelColor}
-          labelSize={labelSize}
-          size={size}
-          status={status}
-        />
+        <div className="preview">
+          <h2>Preview</h2>
+          <ProgressCircle
+            backgroundColor={backgroundColor}
+            color={color}
+            label={label}
+            labelColor={labelColor}
+            labelSize={labelSize}
+            size={size}
+            status={status}
+          />
+        </div>
 
-        <h2>Configuration</h2>
-        { this.displayConfiguration(modifiedProps) }
+        <div className="configuration">
+          <h2>Configuration</h2>
+          { this.displayConfiguration(modifiedProps) }
+        </div>
       </div>
     );
   }
