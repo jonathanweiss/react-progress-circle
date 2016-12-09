@@ -11,19 +11,23 @@
         font-family: 'Alegreya', serif;
       }
 
-      .attribute {
+      .prop-container {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 0.5rem;
       }
-      .attribute > :first-child {
-        flex: 4;
+      .prop-container > :first-child {
+        display: inline-block;
+        min-width: 10rem;
         white-space: nowrap;
       }
-      .attribute > :last-child {
-        flex: 6;
+      .prop-container > :last-child {
+        width: 100%;
+      }
+      .updated {
+        background-color: #fffb8e;
       }
     </style>
   </head>

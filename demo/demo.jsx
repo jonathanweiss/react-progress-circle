@@ -1,19 +1,22 @@
 import React from 'react';
-import ProgressCircle from '../lib/index.js';
+import ProgressCircle from '../lib/index';
+
+const defaultValues = {
+  backgroundColor: '#404040',
+  color: '#339900',
+  label: '%s%',
+  labelColor: '#111111',
+  labelSize: '16px',
+  size: 100,
+  status: 0,
+};
 
 class Demo extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      backgroundColor: '#404040',
-      color: '#339900',
-      label: '%s%',
-      labelColor: '#111111',
-      labelSize: '16px',
-      size: 100,
-      status: 0,
-    };
+    this.state = Object.assign({}, defaultValues);
+    this.lastUpdated = '';
   }
 
   updateProp(propName, elementRef, callback) {
@@ -22,90 +25,82 @@ class Demo extends React.Component {
       value = callback(value);
     }
 
-    this.setState({ [propName]: value});
+    this.lastUpdated = propName;
+    this.setState({ [propName]: value });
+  }
+
+  displayProp(key) {
+    return (
+      <pre
+        key={key}
+        className={this.lastUpdated === key ? 'updated' : ''}
+      >
+        {`  ${key}="${this.state[key]}"`}
+      </pre>
+    );
+  }
+
+  displayConfiguration(modifiedProps) {
+    let result = '';
+
+    if (modifiedProps.length === 0) {
+      result = <pre>{'<ProgressCircle />'}</pre>;
+    } else {
+      result = (
+        <div>
+          <pre>{'<ProgressCircle'}</pre>
+          { modifiedProps.map(key => this.displayProp(key)) }
+          <pre>{'/>'}</pre>
+        </div>
+      );
+    }
+
+    return result;
+  }
+
+  renderPropEntry(type, name, key, onChange, min, max, forceNumber = false) {
+    return (
+      <div className="prop-container" key={key}>
+        <label htmlFor={key}>{name}</label>
+        { type === 'range' ?
+          <input
+            id={key}
+            type={type}
+            min={min}
+            max={max}
+            defaultValue={forceNumber ? parseInt(this.state[key], 10) : this.state[key]}
+            ref={key}
+            onChange={onChange}
+          /> :
+          <input
+            id={key}
+            type={type}
+            defaultValue={this.state[key]}
+            ref={key}
+            onChange={onChange}
+          />
+        }
+      </div>
+    );
   }
 
   render() {
-    const {backgroundColor, color, label, labelColor, labelSize, size, status} = this.state;
+    const { backgroundColor, color, label, labelColor, labelSize, size, status } = this.state;
+    const modifiedProps = Object.keys(this.state).filter(key => this.state[key] !== defaultValues[key]);
+    const propEditors = [
+      this.renderPropEntry('range', 'Status', 'status', () => { this.updateProp('status', 'status'); }, 0, 100),
+      this.renderPropEntry('range', 'Size', 'size', () => { this.updateProp('size', 'size'); }, 16, 800),
+      this.renderPropEntry('range', 'Label size', 'labelSize', () => this.updateProp('labelSize', 'labelSize', value => `${value}px`), 4, 100, true),
+      this.renderPropEntry('text', 'Label text', 'label', () => this.updateProp('label', 'labelText')),
+      this.renderPropEntry('color', 'Color', 'color', () => this.updateProp('color', 'color')),
+      this.renderPropEntry('color', 'Background color', 'backgroundColor', () => this.updateProp('backgroundColor', 'backgroundColor')),
+      this.renderPropEntry('color', 'Label color', 'labelColor', () => this.updateProp('labelColor', 'labelColor')),
+    ];
 
     return (
       <div>
         <h2>Props</h2>
-        <div className="attribute">
-          <label>Status</label>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            defaultValue={this.state.status}
-            ref="status"
-            onChange={event => { this.updateProp('status', 'status') } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Size</label>
-          <input
-            type="range"
-            min="16"
-            max="800"
-            defaultValue={this.state.size}
-            ref="size"
-            onChange={event => { this.updateProp('size', 'size') } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Label size</label>
-          <input
-            type="range"
-            min="4"
-            max="100"
-            defaultValue={parseInt(this.state.labelSize, 10)}
-            ref="labelSize"
-            onChange={event => { this.updateProp('labelSize', 'labelSize', value => `${value}px`) } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Label Text</label>
-          <input
-            type="text"
-            defaultValue={this.state.label}
-            ref="labelText"
-            onChange={event => { this.updateProp('label', 'labelText') } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Color</label>
-          <input
-            type="color"
-            defaultValue={this.state.color}
-            ref="color"
-            onChange={event => { this.updateProp('color', 'color') } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Background Color</label>
-          <input
-            type="color"
-            defaultValue={this.state.backgroundColor}
-            ref="backgroundColor"
-            onChange={event => { this.updateProp('backgroundColor', 'backgroundColor') } }
-          />
-        </div>
-
-        <div className="attribute">
-          <label>Label color</label>
-          <input
-            type="color"
-            defaultValue={this.state.labelColor}
-            ref="labelColor"
-            onChange={event => { this.updateProp('labelColor', 'labelColor') } }
-          />
-        </div>
+        { propEditors }
 
         <h2>Preview</h2>
         <ProgressCircle
@@ -117,8 +112,11 @@ class Demo extends React.Component {
           size={size}
           status={status}
         />
-        </div>
-      );
+
+        <h2>Configuration</h2>
+        { this.displayConfiguration(modifiedProps) }
+      </div>
+    );
   }
 }
 
