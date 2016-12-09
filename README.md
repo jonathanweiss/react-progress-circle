@@ -4,4 +4,4 @@ A React component (based on [sk-progress-circle](https://github.com/jonathanweis
 
 ![An simple example](https://jonathanweiss.github.io/sk-progress-circle/example_1.png)
 
-[See the interactive demo](https://jonathanweiss.github.io/react-progress-circle/).
+[See the interactive demo](https://jonathanweiss.github.io/react-progress-circle/index.html).
