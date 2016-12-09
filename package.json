@@ -7,10 +7,11 @@
     "commit": "git-cz -n",
     "coveralls": "cat ./coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "build": "NODE_ENV=production && webpack -p --display-modules --progress --display-reasons --config webpack.production.config.js",
+    "build:demo": "NODE_ENV=production && webpack -p  --config webpack.demo.config.js",
     "eslint": "node ./node_modules/.bin/eslint src/*.js* demo/*.js*",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "start": "webpack-dev-server --hot --inline --port 5000",
-    "test": "exit 0",
+    "start": "rm docs/demo.js ; webpack-dev-server --hot --inline --port 5000",
+    "test": "npm run eslint",
     "test:dev": "node ./node_modules/karma/bin/karma start --browsers Chrome"
   },
   "files": [

@@ -11,16 +11,16 @@ const defaultValues = {
   status: 0,
 };
 
-class Demo extends React.Component {
+class Demo extends React.Component { // eslint-disable-line
   constructor() {
     super();
 
-    this.state = Object.assign({}, defaultValues);
+    this.state = Object.assign({}, defaultValues); // eslint-disable-line
     this.lastUpdated = '';
   }
 
   updateProp(propName, elementRef, callback) {
-    let value = this.refs[elementRef].value;
+    let value = this.refs[elementRef].value; // eslint-disable-line
     if (callback) {
       value = callback(value);
     }
@@ -91,7 +91,7 @@ class Demo extends React.Component {
       this.renderPropEntry('range', 'Status', 'status', () => { this.updateProp('status', 'status'); }, 0, 100),
       this.renderPropEntry('range', 'Size', 'size', () => { this.updateProp('size', 'size'); }, 16, 800),
       this.renderPropEntry('range', 'Label size', 'labelSize', () => this.updateProp('labelSize', 'labelSize', value => `${value}px`), 4, 100, true),
-      this.renderPropEntry('text', 'Label text', 'label', () => this.updateProp('label', 'labelText')),
+      this.renderPropEntry('text', 'Label text', 'label', () => this.updateProp('label', 'label')),
       this.renderPropEntry('color', 'Color', 'color', () => this.updateProp('color', 'color')),
       this.renderPropEntry('color', 'Background color', 'backgroundColor', () => this.updateProp('backgroundColor', 'backgroundColor')),
       this.renderPropEntry('color', 'Label color', 'labelColor', () => this.updateProp('labelColor', 'labelColor')),

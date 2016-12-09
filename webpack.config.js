@@ -2,8 +2,8 @@ var Webpack = require('webpack');
 var path = require('path');
 
 var libMainFile = path.resolve(__dirname, 'lib', 'index');
-var demoMainFile = path.resolve(__dirname, 'demo', 'index');
-var demoPath = path.resolve(__dirname, 'demo');
+var demoMainFile = path.resolve(__dirname, 'docs', 'index');
+var demoPath = path.resolve(__dirname, 'docs');
 var nodePath = path.resolve(__dirname, 'node_modules');
 
 var config = {
@@ -32,10 +32,6 @@ var config = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
                 exclude: [nodePath]
-            },
-            {
-                test: /\.css$/,
-                loader: 'style!css'
             }
         ]
     },
