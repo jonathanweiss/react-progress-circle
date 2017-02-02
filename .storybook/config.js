@@ -1,8 +1,7 @@
-import { configure } from '@kadira/storybook';
+import { configure } from '@kadira/storybook'; // eslint-disable-line import/no-extraneous-dependencies
 
 function loadStories() {
-  require('../stories/index.jsx');
-  // You can require as many stories as you need.
+  require('../stories'); // eslint-disable-line global-require
 }
 
 configure(loadStories, module);
