@@ -37,7 +37,7 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "sk-progress-circle": "^0.7.0",
+    "sk-progress-circle": "^0.8.0",
     "skatejs-react-integration": "^2.0.6"
   },
   "devDependencies": {
