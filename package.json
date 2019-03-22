@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/jonathanweiss/react-progress-circle#readme",
   "dependencies": {
-    "react": "^15.4.2",
+    "react": "^16.8.5",
     "react-dom": "^15.5.1",
     "sk-progress-circle": "^0.8.0",
     "skatejs-react-integration": "^2.0.6"
