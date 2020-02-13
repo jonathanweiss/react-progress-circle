@@ -55,7 +55,7 @@
     "mutationobserver-shim": "^0.3.2",
     "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.4.2",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^17.0.3",
     "webpack": "^2.3.0",
     "webpack-dev-server": "^2.2.1"
   },
